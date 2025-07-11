@@ -4,10 +4,10 @@ NUCC Data Comparison Summary
 Downloaded dataset: /Users/ftrotter/Downloads/nucc_taxonomy_251.csv
 Scraped dataset: ./data/nucc_codes.csv
 
-Total records in merged dataset: 924
+Total records in merged dataset: 921
 Records in both datasets: 883
 Records only in downloaded dataset: 0
-Records only in scraped dataset: 41
+Records only in scraped dataset: 38
 
 Sample codes only in scraped dataset:
   - 14
