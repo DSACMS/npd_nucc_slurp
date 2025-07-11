@@ -2,10 +2,22 @@ NUCC Data Comparison Summary
 ========================================
 
 Downloaded dataset: /Users/ftrotter/Downloads/nucc_taxonomy_251.csv
-Scraped dataset: data/nucc_codes.csv
+Scraped dataset: ./data/nucc_codes.csv
 
-Total records in merged dataset: 883
+Total records in merged dataset: 924
 Records in both datasets: 883
 Records only in downloaded dataset: 0
-Records only in scraped dataset: 0
+Records only in scraped dataset: 41
+
+Sample codes only in scraped dataset:
+  - 14
+  - 1813
+  - 1851
+  - 1865
+  - 1886
+  - 1945
+  - 1962
+  - 2122
+  - 2133
+  - 2156
 
