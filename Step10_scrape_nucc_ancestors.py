@@ -174,6 +174,21 @@ class NUCCAncestorScraper:
         
         print(f"Successfully wrote CSV file to {output_path}")
     
+    def write_immediate_parent_csv(self, treenodes_data: List[Dict], output_path: str):
+        """Write immediate parent relationships to CSV file."""
+        print(f"Writing immediate parent relationships to {output_path}...")
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        with open(output_path, 'w', newline='', encoding='utf-8') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(['code_id', 'immediate_parent_code_id'])
+            for node in treenodes_data:
+                node_id = node['id']
+                if node_id in self.ignored_nids:
+                    continue
+                parent_id = node['pId']
+                writer.writerow([node_id, parent_id])
+        print(f"Successfully wrote immediate parent CSV file to {output_path}")
+
     def run(self, output_path: str = './data/nucc_parent_code.csv'):
         """Run the complete scraping process."""
         try:
@@ -192,6 +207,11 @@ class NUCCAncestorScraper:
             
             # Write to CSV
             self.write_csv(unique_relationships, output_path)
+
+            # Write immediate parent CSV
+            self.write_immediate_parent_csv(
+                treenodes_data, './data/immediate_parent_code.csv'
+            )
             
             print(f"\n✅ Successfully completed scraping!")
             print(f"Output file: {output_path}")

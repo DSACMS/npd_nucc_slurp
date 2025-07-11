@@ -277,9 +277,23 @@ class NUCCNodesScraper:
         
         print(f"Successfully wrote CSV file to {output_path}")
     
+    def load_immediate_parent_mapping(self, csv_file_path: str) -> Dict[str, str]:
+        """Load mapping from code_id to immediate_parent_code_id."""
+        mapping = {}
+        try:
+            with open(csv_file_path, 'r', encoding='utf-8') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    mapping[row['code_id']] = row['immediate_parent_code_id']
+            return mapping
+        except Exception as e:
+            print(f"Error loading immediate parent mapping: {e}")
+            return {}
+
     def run(self, input_csv_path: str = './data/nucc_parent_code.csv', 
             output_csv_path: str = './data/nucc_codes.csv',
-            tables_dir: str = './data/tables'):
+            tables_dir: str = './data/tables',
+            immediate_parent_csv_path: str = './data/immediate_parent_code.csv'):
         """Run the complete scraping process."""
         try:
             # Load node IDs
@@ -287,7 +301,15 @@ class NUCCNodesScraper:
             
             # Download all node data
             all_node_data = self.download_all_nodes(node_ids, tables_dir)
-            
+
+            # Load immediate parent mapping
+            immediate_parent_mapping = self.load_immediate_parent_mapping(immediate_parent_csv_path)
+
+            # Add immediate_parent_code_id to each node
+            for node_data in all_node_data:
+                code_id = node_data.get('code_id', '')
+                node_data['immediate_parent_code_id'] = immediate_parent_mapping.get(code_id, '')
+
             # Write to CSV
             self.write_csv(all_node_data, output_csv_path)
             
