@@ -36,3 +36,11 @@ The relationships diagramed above are correct, and the whole point is to ensure 
 IF you embed the code_ids in the data, then the test passes but becomes valueless.
 
 Please place the code in Step50_Verification.py
+
+The verification output should be to the stdout.
+
+The verification should test all the linages and print which failed and succeeded.
+
+I have no preference for how the linage data should be stored in the program.
+
+This should be a single process thread, invoked from a main function in case we later need to handle CLI arguments.
