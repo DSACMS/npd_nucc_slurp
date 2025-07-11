@@ -25,7 +25,7 @@ class NUCCAncestorScraper:
         self.session.headers.update({
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
         })
-        # Explicitly ignore these nid values during scraping
+        # Explicitly ignore these nid values during scraping. They are not taxonomies but rather comments on the taxonomy website.
         self.ignored_nids = {5, 8, 2712}
         
     def fetch_html(self):
