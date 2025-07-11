@@ -25,6 +25,8 @@ class NUCCAncestorScraper:
         self.session.headers.update({
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
         })
+        # Explicitly ignore these nid values during scraping
+        self.ignored_nids = {5, 8, 2712}
         
     def fetch_html(self):
         """Fetch HTML content from the NUCC taxonomy site."""
@@ -104,24 +106,42 @@ class NUCCAncestorScraper:
         # Create a mapping of node_id to node data
         nodes_by_id = {node['id']: node for node in treenodes_data}
         
+        # Filter out ignored nodes
+        ignored_count = 0
+        
         # For each node, find all its ancestors
         for node in treenodes_data:
-            node_id = str(node['id'])
+            node_id = node['id']
+            
+            # Skip ignored nid values
+            if node_id in self.ignored_nids:
+                ignored_count += 1
+                continue
+                
+            node_id_str = str(node_id)
             
             # Add self-relationship (node is its own ancestor)
-            relationships.append((node_id, node_id))
+            relationships.append((node_id_str, node_id_str))
             
             # Walk up the parent chain to find all ancestors
             current_node = node
             while current_node['pId'] != 0:  # 0 means root level
                 parent_id = current_node['pId']
+                
+                # Skip if parent is in ignored list
+                if parent_id in self.ignored_nids:
+                    break
+                    
                 if parent_id in nodes_by_id:
                     parent_node = nodes_by_id[parent_id]
-                    relationships.append((str(parent_id), node_id))
+                    relationships.append((str(parent_id), node_id_str))
                     current_node = parent_node
                 else:
                     # Parent not found, break the chain
                     break
+        
+        if ignored_count > 0:
+            print(f"Ignored {ignored_count} nodes with nid values: {self.ignored_nids}")
         
         return relationships
     
