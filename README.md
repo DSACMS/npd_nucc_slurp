@@ -2,6 +2,13 @@
 
 A comprehensive toolkit for scraping and analyzing NUCC (National Uniform Claim Committee) taxonomy data from the official taxonomy website.
 
+## Approach and Purpose
+The [web version](https://taxonomy.nucc.org/) of the NUCC taxonomy code list has slightly different data than the CSV download version.
+First, it has explict parent linkage on a per-taxonomy basis. Second it includes rows for groupings that are not directly in the CSV (the title of the grouping can be inferred, but the description of the grouping cannot).
+
+As a result, this project both slurps the web version and processes the CSV version to create a merged picture of the nucc codeset. 
+It also creates path csv file for fast numerical querying, and a csv file that documents the various "sources" in the notes sections. 
+
 ## Overview
 
 This project provides a complete pipeline for extracting, processing, and analyzing NUCC taxonomy codes and their hierarchical relationships. The NUCC taxonomy is used to classify healthcare provider types and specialties in the United States.
