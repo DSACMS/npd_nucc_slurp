@@ -3,11 +3,12 @@
 A comprehensive toolkit for scraping and analyzing NUCC (National Uniform Claim Committee) taxonomy data from the official taxonomy website.
 
 ## Approach and Purpose
+
 The [web version](https://taxonomy.nucc.org/) of the NUCC taxonomy code list has slightly different data than the CSV download version.
 First, it has explict parent linkage on a per-taxonomy basis. Second it includes rows for groupings that are not directly in the CSV (the title of the grouping can be inferred, but the description of the grouping cannot).
 
-As a result, this project both slurps the web version and processes the CSV version to create a merged picture of the nucc codeset. 
-It also creates path csv file for fast numerical querying, and a csv file that documents the various "sources" in the notes sections. 
+As a result, this project both slurps the web version and processes the CSV version to create a merged picture of the nucc codeset.
+It also creates path csv file for fast numerical querying, and a csv file that documents the various "sources" in the notes sections.
 
 ## Overview
 
@@ -18,46 +19,56 @@ This project provides a complete pipeline for extracting, processing, and analyz
 The scripts should be executed in the following order:
 
 ### 1. `scrape_nucc_ancestors.py`
+
 **Purpose**: Scrapes the main NUCC taxonomy website to extract hierarchical relationships between codes.
 
 **What it does**:
-- Fetches HTML from https://taxonomy.nucc.org/
+
+- Fetches HTML from <https://taxonomy.nucc.org/>
 - Parses the JavaScript treenodes data structure
 - Extracts all ancestor-child relationships in the taxonomy hierarchy
 - Creates self-referencing relationships (each code is its own ancestor)
 
 **Output**: `data/nucc_parent_code.csv` with columns:
+
 - `ancestor_nucc_code_id`: The ancestor code ID
 - `child_nucc_code_id`: The child code ID
 
 **Usage**:
+
 ```bash
 python3 scrape_nucc_ancestors.py
 ```
 
 ### 2. `scrape_nucc_nodes.py`
+
 **Purpose**: Scrapes detailed information for each individual taxonomy code from the NUCC API.
 
 **What it does**:
+
 - Reads all unique node IDs from `data/nucc_parent_code.csv`
 - Downloads detailed information for each node from the NUCC API
 - Parses HTML content to extract structured data (name, definition, notes, etc.)
 - Caches HTML snippets in `data/tables/` for analysis
 - Uses intelligent caching to avoid re-downloading recently fetched data
 
-**Output**: 
+**Output**:
+
 - `data/nucc_codes.csv` with detailed code information
 - `data/tables/node_*.html` files containing raw HTML snippets
 
 **Usage**:
+
 ```bash
 python3 scrape_nucc_nodes.py
 ```
 
 ### 3. `parse_nucc_sources.py`
+
 **Purpose**: Extracts and structures source information from the notes column of the NUCC codes.
 
 **What it does**:
+
 - Parses the `code_notes` column from `data/nucc_codes.csv`
 - Extracts source citations that follow the pattern "Source: text [date: note]"
 - Automatically extracts URLs from source text
@@ -65,6 +76,7 @@ python3 scrape_nucc_nodes.py
 - Creates normalized source records
 
 **Output**: `data/nucc_sources.csv` with columns:
+
 - `nucc_code_id`: The NUCC code ID
 - `full_source_text`: Complete source text
 - `source_date`: Date from source citation
@@ -72,14 +84,17 @@ python3 scrape_nucc_nodes.py
 - `extracted_urls`: URLs found in source text
 
 **Usage**:
+
 ```bash
 python3 parse_nucc_sources.py
 ```
 
 ### 4. `compare_nucc_data.py`
+
 **Purpose**: Compares scraped data with official NUCC taxonomy CSV files to identify differences.
 
 **What it does**:
+
 - Loads both the scraped data and an official NUCC taxonomy CSV
 - Performs outer join on taxonomy codes
 - Identifies codes that exist in only one dataset
@@ -87,10 +102,12 @@ python3 parse_nucc_sources.py
 - Generates summary statistics and reports
 
 **Output**:
+
 - `data/merged_nucc_data.csv`: Combined dataset from both sources
 - `data/nucc_comparison_summary.txt`: Summary report of differences
 
 **Usage**:
+
 ```bash
 python3 compare_nucc_data.py --download_csv /path/to/official/nucc_taxonomy.csv --scrapped_csv ./data/nucc_codes.csv
 ```
