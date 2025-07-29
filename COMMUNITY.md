@@ -10,5 +10,5 @@ Roles to include, but not limited to: Project Owner, Technical Lead, Developers/
 
 | Role   | Name    | Affiliation    |
 | :----- | :------ | :------------- |
-| Developer | Fred Trotter | @CareSet |
+| Developer | Fred Trotter | @DSACMS |
 
