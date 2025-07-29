@@ -1,0 +1,37 @@
+{
+  "name": "NUCC Slurp",
+  "description": " because the CSV makes calculating the parent difficult. ",
+  "permissions": {
+    "licenses": [
+      {
+        "name": "CC0-1.0",
+        "URL": "https://raw.githubusercontent.com/DSACMS/npd_nucc_slurp/refs/heads/main/LICENSE"
+      }
+    ],
+    "usageType": "openSource",
+    "exemptionText": ""
+  },
+  "repositoryURL": "https://github.com/DSACMS/npd_nucc_slurp",
+  "repositoryVisibility": "public",
+  "laborHours": 11161.712,
+  "reuseFrequency": {
+    "forks": 0,
+    "clones": 7
+  },
+  "maintenance": "none",
+  "contractNumber": "none",
+  "tags": [
+    "html",
+    "python",
+    "data",
+    "data science"
+  ],
+  "contact": {
+    "email": "opensource@cms.hhs.gov",
+    "name": ""
+  },
+  "feedbackMechanisms": [
+    "https://github.com/DSACMS/npd_nucc_slurp/issues"
+  ],
+  "AIUseCaseInventory": false
+}
