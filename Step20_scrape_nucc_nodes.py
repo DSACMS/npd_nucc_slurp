@@ -14,7 +14,7 @@ import os
 from typing import Dict, List, Set, Optional
 import time
 from datetime import datetime, timedelta
-
+import re
 
 class NUCCNodesScraper:
     """Scraper for individual NUCC taxonomy node details."""
@@ -149,6 +149,7 @@ class NUCCNodesScraper:
                 if len(cells) >= 2:
                     key = cells[0].get_text().strip()
                     value = cells[1].get_text().strip()
+                    value = re.sub(r'(?i)<br\s*/?>', '\n', value) # remove html br variants.
                     
                     # Map known fields
                     if key.lower() == 'name':
