@@ -14,7 +14,7 @@
     "usageType": "openSource",
     "exemptionText": ""
   },
-  "organization": "",
+  "organization": "DSACMS",
   "repositoryURL": "https://github.com/DSACMS/npd_nucc_slurp",
   "repositoryHost": "github",
   "repositoryVisibility": "public",
@@ -57,18 +57,18 @@
   ],
   "contact": {
     "email": "opensource@cms.hhs.gov",
-    "name": ""
+    "name": "Open Source Program Office"
   },
   "feedbackMechanism": "https://github.com/DSACMS/npd_nucc_slurp/issues",
   "AIUseCaseID": "0",
   "localisation": false,
-  "repositoryType": "",
+  "repositoryType": "tools",
   "userInput": false,
-  "fismaLevel": "",
-  "group": "",
+  "fismaLevel": "low",
+  "group": "CMS/OA/DSAC",
   "projects": [],
   "systems": [],
-  "subsetInHealthcare": [],
-  "userType": [],
-  "maturityModelTier": 0
+  "subsetInHealthcare": ["operational"],
+  "userType": ["government"],
+  "maturityModelTier": 3
 }
