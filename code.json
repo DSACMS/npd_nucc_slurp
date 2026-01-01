@@ -23,7 +23,7 @@
   "disclaimerURL": "",
   "disclaimerText": "",
   "vcs": "git",
-  "laborHours": 11148,
+  "laborHours": 11152,
   "reuseFrequency": {
     "forks": 0,
     "clones": 7
@@ -46,8 +46,8 @@
   "partners": [],
   "date": {
     "created": "2025-07-22T18:56:17Z",
-    "lastModified": "2025-12-08T06:37:45Z",
-    "metadataLastUpdated": "2025-12-08T06:38:50.014Z"
+    "lastModified": "2025-12-10T01:43:14Z",
+    "metadataLastUpdated": "2026-01-01T02:05:05.294Z"
   },
   "tags": [
     "html",
@@ -68,7 +68,11 @@
   "group": "CMS/OA/DSAC",
   "projects": [],
   "systems": [],
-  "subsetInHealthcare": ["operational"],
-  "userType": ["government"],
+  "subsetInHealthcare": [
+    "operational"
+  ],
+  "userType": [
+    "government"
+  ],
   "maturityModelTier": 3
 }
